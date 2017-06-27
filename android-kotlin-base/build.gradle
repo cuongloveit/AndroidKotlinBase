@@ -1,16 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -30,4 +29,56 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:25.4.0'
     testImplementation 'junit:junit:4.12'
+
+    //support
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["appcompat-v7"]) {
+        transitive = true
+    }
+    implementation(rootProject.ext.dependencies["design"]) {
+        transitive = true
+    }
+    implementation(rootProject.ext.dependencies["support-v4"]) {
+        transitive true
+    }
+    implementation(rootProject.ext.dependencies["annotations"]) {
+        transitive true
+    }
+    implementation(rootProject.ext.dependencies["recyclerview-v7"]) {
+        transitive true
+    }
+
+    //network
+    implementation(rootProject.ext.dependencies["retrofit"]) {
+        exclude module: "okhttp"
+    }
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation(rootProject.ext.dependencies["retrofit-adapter-rxjava2"]) {
+        exclude module: "rxjava"
+    }
+    implementation rootProject.ext.dependencies["okhttp3"]
+    implementation rootProject.ext.dependencies["okhttp-urlconnection"]
+    implementation(rootProject.ext.dependencies["logging-interceptor"]) {
+        exclude group: 'org.json', module: 'json'
+    }
+    implementation rootProject.ext.dependencies["glide"]
+
+    //Reactive
+    implementation rootProject.ext.dependencies["rxandroid2"]
+    implementation rootProject.ext.dependencies["rxjava2"]
+
+    //Slim Adapter
+    implementation rootProject.ext.dependencies["slim-adapter"]
+
+    //Permissions
+    implementation rootProject.ext.dependencies["rx-permissions"]
+
+    //Dagger
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    //RxLifeCycle
+    implementation rootProject.ext.dependencies["rxLifeCycle"]
+    implementation rootProject.ext.dependencies["rxLifeCycleAndroid"]
+    implementation rootProject.ext.dependencies["rxLifeCycleComponent"]
 }
