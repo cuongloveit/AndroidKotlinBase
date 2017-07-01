@@ -4,6 +4,6 @@
 /.idea
 .DS_Store
 /build
-/android-kotlin-base/build
+/android-kotlin-com.androidtmc.android_kotlin_base.base/build
 /captures
 .externalNativeBuild
