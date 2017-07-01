@@ -1,8 +1,8 @@
-package com.androidtmc.androidkotlinbase.view.activity
+package com.androidtmc.example.view.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.androidtmc.androidkotlinbase.R
+import com.androidtmc.example.R
 
 class MainActivity : AppCompatActivity() {
 

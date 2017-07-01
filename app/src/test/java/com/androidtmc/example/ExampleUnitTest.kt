@@ -1,4 +1,4 @@
-package com.androidtmc.androidkotlinbase
+package com.androidtmc.example
 
 import org.junit.Test
 

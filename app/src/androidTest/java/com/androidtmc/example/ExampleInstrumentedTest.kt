@@ -1,4 +1,4 @@
-package com.androidtmc.androidkotlinbase
+package com.androidtmc.example
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

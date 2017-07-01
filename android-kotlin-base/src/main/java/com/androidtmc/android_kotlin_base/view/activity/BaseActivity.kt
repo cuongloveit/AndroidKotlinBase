@@ -1,18 +1,43 @@
 package com.androidtmc.android_kotlin_base.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Toast
+import com.androidtmc.android_kotlin_base.base.IActivity
+import com.androidtmc.android_kotlin_base.base.IPresenter
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import javax.inject.Inject
 
 /**
  * Created by cuong on 7/1/17.
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<P : IPresenter> : RxAppCompatActivity(), OnBaseAction, IActivity {
+    @Inject
+    lateinit var presenter: P
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    fun showMessage(message: String) {
+    override fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+
+    override fun showDialog(message: String) {
+
+    }
+
+    override fun showDialog(message: String, textButton: String, onClickListener: View.OnClickListener) {
+
+    }
+
+    override fun showLoader(isShow: Boolean) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 }
