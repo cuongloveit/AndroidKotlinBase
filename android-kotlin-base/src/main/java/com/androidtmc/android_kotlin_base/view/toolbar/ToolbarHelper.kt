@@ -9,48 +9,45 @@ import com.androidtmc.android_kotlin_base.R
 /**
  * Created by cuong on 7/1/17.
  */
-class ToolbarHelper : OnToolbarAction {
+open class ToolbarHelper : OnToolbarAction {
 
 
     private var toolbar: Toolbar
 
     private var context: Context?
 
-    private var leftBtn: AppCompatTextView?
+    private var leftBtn: AppCompatTextView? = null
 
-    private var rightBtn: AppCompatTextView?
+    private var rightBtn: AppCompatTextView? = null
 
-    private var tvTitle: AppCompatTextView?
+    private var tvTitle: AppCompatTextView? = null
 
     @Throws(IllegalAccessException::class)
     constructor(toolbar: Toolbar) {
         this.toolbar = toolbar
 
         context = toolbar.context
-        leftBtn = toolbar.findViewById(R.id.left_button) as AppCompatTextView
-        rightBtn = toolbar.findViewById(R.id.right_button) as AppCompatTextView
-
-        if (rightBtn == null) {
-            throw IllegalAccessException("Can't find this right button.")
+        toolbar.findViewById(R.id.left_button)?.let {
+            leftBtn = toolbar.findViewById(R.id.left_button) as AppCompatTextView
         }
+        toolbar.findViewById(R.id.right_button)?.let {
+            rightBtn = toolbar.findViewById(R.id.right_button) as AppCompatTextView
+        }
+        toolbar.findViewById(R.id.tvTitleToolbar)?.let {
+            tvTitle = toolbar.findViewById(R.id.tvTitleToolbar) as AppCompatTextView
+        }
+
         rightBtn?.isClickable = true
-
-        if (leftBtn == null) {
-            throw IllegalAccessException("Can't find this Left button")
-        }
         leftBtn?.isClickable = true
-
-        tvTitle = toolbar.findViewById(R.id.tvTitleToolbar) as AppCompatTextView
-        if (tvTitle == null) {
-            throw IllegalAccessException("Can't find this Title TextView")
-        }
         tvTitle?.isClickable = true
     }
 
     override fun setTitle(title: String) {
+        tvTitle?.text = title
     }
 
     override fun setTitle(title: String, font: String) {
+        tvTitle?.text = title
     }
 
     override fun setTitleMainColor(color: Int) {
@@ -60,12 +57,14 @@ class ToolbarHelper : OnToolbarAction {
     }
 
     override fun showLeftButton(isShow: Boolean) {
+        leftBtn?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE
     }
 
     override fun showLeftButton(isShow: Boolean, onClickListener: View.OnClickListener) {
     }
 
     override fun showLeftButton(iconRes: Int, onClickListener: View.OnClickListener) {
+        leftBtn?.setCompoundDrawablesWithIntrinsicBounds(iconRes, 0, 0, 0)
     }
 
     override fun showLeftButton(text: String, onClickListener: View.OnClickListener) {

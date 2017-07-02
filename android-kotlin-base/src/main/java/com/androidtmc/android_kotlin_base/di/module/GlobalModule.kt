@@ -83,7 +83,7 @@ class GlobalModule {
     }
 
 
-    class Builder () {
+    class Builder {
         var cacheFile: File? = null
         var gsonConfiguration: AppModule.GsonConfiguration? = null
         var interceptors: List<Interceptor>? = null

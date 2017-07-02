@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import com.androidtmc.android_kotlin_base.R
 import com.androidtmc.android_kotlin_base.base.IPresenter
-import com.androidtmc.android_kotlin_base.view.fragment.FragmentHelper
 import com.androidtmc.android_kotlin_base.view.toolbar.OnCallBackToolbarAction
 import com.androidtmc.android_kotlin_base.view.toolbar.ToolbarHelper
 
@@ -17,12 +16,11 @@ abstract class BaseMainActivity<P : IPresenter, T : ToolbarHelper> : BaseActivit
     private val NULL_TOOLBAR_EX = "Can't find toolbar of this activity. Please checking it. Note: With raw id : R.id.toolbar"
     var toolbarHelper: ToolbarHelper? = null
     protected var toolbar: Toolbar? = null
-    lateinit var fragmentHelper: FragmentHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        fragmentHelper = FragmentHelper(supportFragmentManager, R.id.fragment_content)
         super.onCreate(savedInstanceState)
+        setContentView(getLayoutResource())
         toolbar = findViewById(R.id.toolbar) as Toolbar
         try {
             setupToolbar()
@@ -32,34 +30,36 @@ abstract class BaseMainActivity<P : IPresenter, T : ToolbarHelper> : BaseActivit
 
     }
 
+    abstract fun getLayoutResource(): Int
+
     override fun onCallBackToolbar() {
         fragmentHelper.popBackStack()
     }
 
     override fun setTitleToolbar(msg: String) {
-        toolbarHelper!!.setTitle(msg)
+        toolbarHelper?.setTitle(msg)
     }
 
     override fun setTitleToolbar(msg: String, font: String) {
-        toolbarHelper!!.setTitle(msg, font)
+        toolbarHelper?.setTitle(msg, font)
     }
 
     override fun setTitleMainColor(color: Int) {
-        toolbarHelper!!.setTitleMainColor(color)
+        toolbarHelper?.setTitleMainColor(color)
     }
 
     @Throws(IllegalAccessException::class)
     private fun setupToolbar() {
         if (toolbar == null) {
-            //throw NullPointerException(NULL_TOOLBAR_EX)
+            throw NullPointerException(NULL_TOOLBAR_EX)
         } else {
             setSupportActionBar(toolbar)
-            toolbar!!.setBackgroundResource(onColorOfToolbar())
+            toolbar?.setBackgroundResource(onColorOfToolbar())
             toolbarHelper = getMyToolbarHelper()
             if (toolbarHelper == null) {
                 toolbarHelper = ToolbarHelper(toolbar!!)
             }
-            toolbarHelper!!.showLeftButton(onImageForLeftButtonToolbar(), null)
+            toolbarHelper?.showLeftButton(onImageForLeftButtonToolbar(), null)
         }
     }
 

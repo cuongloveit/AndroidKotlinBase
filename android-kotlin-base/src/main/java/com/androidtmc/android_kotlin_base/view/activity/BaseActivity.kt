@@ -3,8 +3,11 @@ package com.androidtmc.android_kotlin_base.view.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.androidtmc.android_kotlin_base.R
 import com.androidtmc.android_kotlin_base.base.IActivity
 import com.androidtmc.android_kotlin_base.base.IPresenter
+import com.androidtmc.android_kotlin_base.view.fragment.BaseFragment
+import com.androidtmc.android_kotlin_base.view.fragment.FragmentHelper
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import javax.inject.Inject
 
@@ -14,9 +17,10 @@ import javax.inject.Inject
 abstract class BaseActivity<P : IPresenter> : RxAppCompatActivity(), OnBaseAction, IActivity {
     @Inject
     lateinit var presenter: P
-
+    lateinit var fragmentHelper: FragmentHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fragmentHelper = FragmentHelper(supportFragmentManager, R.id.fragment_content)
     }
 
     override fun showMessage(message: String) {
@@ -40,4 +44,9 @@ abstract class BaseActivity<P : IPresenter> : RxAppCompatActivity(), OnBaseActio
         super.onDestroy()
         presenter.onDestroy()
     }
+
+    override fun changeFragment(fragment: BaseFragment<*>, isBackStack: Boolean) {
+        fragmentHelper.replaceFragment(fragment, isBackStack, R.anim.fade_in, R.anim.fade_out)
+    }
+
 }

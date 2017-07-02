@@ -1,6 +1,9 @@
 package com.androidtmc.android_kotlin_base.view.fragment
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.androidtmc.android_kotlin_base.base.IFragment
 import com.androidtmc.android_kotlin_base.base.IPresenter
 import com.androidtmc.android_kotlin_base.view.activity.BaseActivity
@@ -14,7 +17,16 @@ import javax.inject.Inject
 abstract class BaseFragment<P : IPresenter> : RxFragment(), IFragment {
     @Inject
     lateinit var presenter: P
-    protected lateinit var rooView: View
+    protected lateinit var rootView: View
+
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater!!.inflate(getLayoutResource(),container,false)
+        return rootView
+    }
+
+    abstract fun getLayoutResource(): Int
+
 
     override fun onDestroy() {
         super.onDestroy()

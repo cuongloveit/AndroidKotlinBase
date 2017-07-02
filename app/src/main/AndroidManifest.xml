@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data android:name="vn.eazy.base.mvp.example.mvp.di.module.AppConfig"
+            android:value="ConfigModule"/>
     </application>
 
 </manifest>
