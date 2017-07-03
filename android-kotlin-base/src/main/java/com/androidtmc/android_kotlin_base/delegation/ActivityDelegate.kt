@@ -23,13 +23,35 @@ class ActivityDelegate(var activity: Activity ): Activity(),Serializable {
         iActivity.setupActivityComponent((activity.application as App).getAppComponent())
     }
 
-    @SuppressLint("MissingSuperCall")
+    @SuppressLint("MissingSuperCall") public
     override fun onDestroy() {
 
     }
 
-    @SuppressLint("MissingSuperCall")
+    @SuppressLint("MissingSuperCall") public
     override fun onStart() {
+
+    }
+
+    @SuppressLint("MissingSuperCall")
+    public override fun onResume() {
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onRestart() {
+    }
+
+    @SuppressLint("MissingSuperCall")
+    public override fun onPause() {
+
+    }
+
+
+    @SuppressLint("MissingSuperCall") public
+    override fun onStop() {
+    }
+
+    public override fun onSaveInstanceState(outState: Bundle?) {
 
     }
 

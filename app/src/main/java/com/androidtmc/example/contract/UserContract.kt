@@ -11,6 +11,8 @@ import io.reactivex.Flowable
 interface UserContract {
     interface View : IView {
 
+        fun onCreateUserSuccess(user: User)
+
 
     }
 

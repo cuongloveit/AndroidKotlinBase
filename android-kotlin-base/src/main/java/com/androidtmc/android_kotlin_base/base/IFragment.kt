@@ -1,5 +1,6 @@
 package com.androidtmc.android_kotlin_base.base
 
+import com.androidtmc.android_kotlin_base.di.component.AppComponent
 import com.androidtmc.android_kotlin_base.view.activity.OnBaseAction
 
 /**
@@ -7,7 +8,7 @@ import com.androidtmc.android_kotlin_base.view.activity.OnBaseAction
  */
 interface IFragment : OnBaseAction {
 
-    fun setupFragmentComponent()
+    fun setupFragmentComponent(appComponent: AppComponent)
 
 
 }

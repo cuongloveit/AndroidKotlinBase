@@ -1,6 +1,5 @@
 package com.androidtmc.example.presenter
 
-import android.util.Log
 import com.androidtmc.android_kotlin_base.base.BasePresenter
 import com.androidtmc.android_kotlin_base.di.scope.ActivityScope
 import com.androidtmc.android_kotlin_base.utils.RxUtils
@@ -9,6 +8,7 @@ import com.androidtmc.example.model.entity.User
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxFragment
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
+import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 /**
@@ -19,10 +19,10 @@ class UserPresenter @Inject constructor(model : UserContract.Model,view : UserCo
     :BasePresenter<UserContract.Model,UserContract.View>(model,view) {
 
     fun createUser(user : User){
-        mModel?.createUser(user)
+        mModel.createUser(user)
                 .compose(RxUtils.applySchedules(mView))
                 .bindUntilEvent(mView as RxFragment, FragmentEvent.PAUSE)
-                .subscribe({ Log.d("TAG", it.toString()) })
+                .subscribe(Consumer {  mView.onCreateUserSuccess(user)})
     }
 
 

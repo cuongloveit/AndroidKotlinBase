@@ -98,6 +98,7 @@ dependencies {
     implementation rootProject.ext.dependencies["rxCache"]
     implementation rootProject.ext.dependencies["polyglot"]
 }
+
 kapt {
     generateStubs = true
 }

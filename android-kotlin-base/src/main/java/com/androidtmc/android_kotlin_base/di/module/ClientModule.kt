@@ -9,7 +9,6 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.HttpUrl
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -46,7 +45,7 @@ class ClientModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(application: Application, builder: OkHttpClient.Builder, cache: Cache?, interceptors: List<Interceptor>?, httpConfiguration: OkHttpConfiguration?): OkHttpClient {
+    fun provideOkHttpClient(application: Application, builder: OkHttpClient.Builder, cache: Cache?, httpConfiguration: OkHttpConfiguration?): OkHttpClient {
         builder.cache(cache)
                 .connectTimeout(CONNECT_TIMEOUT.toLong(), TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
@@ -58,11 +57,11 @@ class ClientModule {
                         .response("Response")
                         .build())
 
-        if (interceptors != null && !interceptors.isEmpty()) {
-            for (interceptor in interceptors) {
-                builder.addInterceptor(interceptor)
-            }
-        }
+//        if (interceptors != null && !interceptors.isEmpty()) {
+//            for (interceptor in interceptors) {
+//                builder.addInterceptor(interceptor)
+//            }
+//        }
 
         httpConfiguration?.configOkHttp(application, builder)
 

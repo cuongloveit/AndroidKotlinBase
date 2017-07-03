@@ -11,7 +11,7 @@ import javax.inject.Singleton
  * Created by cuong on 6/30/17.
  */
 @Singleton
-class APIManager @Inject constructor() :IAPIManager {
+class APIManager @Inject constructor(var mRetrofit: Retrofit) :IAPIManager {
     override fun injectRetrofitService(vararg services: Class<*>) {
         services
                 .filterNot { mRetrofitServiceCache.containsKey(it.simpleName) }
@@ -25,7 +25,6 @@ class APIManager @Inject constructor() :IAPIManager {
     }
 
     private val mRetrofitServiceCache = LinkedHashMap<String, Any>()
-    private lateinit var mRetrofit: Retrofit
 
 
 

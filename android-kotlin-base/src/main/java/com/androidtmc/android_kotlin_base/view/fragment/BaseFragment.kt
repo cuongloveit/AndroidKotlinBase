@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.androidtmc.android_kotlin_base.base.IFragment
 import com.androidtmc.android_kotlin_base.base.IPresenter
+import com.androidtmc.android_kotlin_base.delegation.App
 import com.androidtmc.android_kotlin_base.view.activity.BaseActivity
 import com.trello.rxlifecycle2.components.support.RxFragment
 import javax.inject.Inject
@@ -18,6 +19,10 @@ abstract class BaseFragment<P : IPresenter> : RxFragment(), IFragment {
     @Inject
     lateinit var presenter: P
     protected lateinit var rootView: View
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setupFragmentComponent((activity.application as App).getAppComponent())
+        super.onCreate(savedInstanceState)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,6 +63,7 @@ abstract class BaseFragment<P : IPresenter> : RxFragment(), IFragment {
         getBaseActivity().showLoader(isShow)
 
     }
+
 
 
 }

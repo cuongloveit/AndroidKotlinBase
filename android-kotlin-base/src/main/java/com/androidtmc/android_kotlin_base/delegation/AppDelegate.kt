@@ -22,15 +22,14 @@ class AppDelegate : App {
     private var mConfigModules: List<ConfigModule>? = null
     private var mAppLifeCycles: List<LifeCycle>? = ArrayList()
     private var mActivityLifeCycles: ArrayList<Application.ActivityLifecycleCallbacks>? = ArrayList()
-    var mApplication: Application?
-    private var configModules: List<ConfigModule>? = null
+     var mApplication: Application?
     var mAppComponent: AppComponent? = null
 
     @Inject
     constructor(application: Application) {
         this.mApplication = application
-        this.configModules = ManifestParser(application).parse()
-        configModules?.forEach {
+        this.mConfigModules = ManifestParser(application).parse()
+        mConfigModules?.forEach {
             it.injectActivityLifeCycles(application, mActivityLifeCycles!!)
         }
 
@@ -38,13 +37,13 @@ class AppDelegate : App {
 
     fun onCreate() {
         mAppComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(mApplication))
+                .appModule(AppModule(mApplication!!))
                 .clientModule(ClientModule())
                 .globalModule(getGlobalModule(mApplication!!, mConfigModules!!))
                 .build()
 
         mAppComponent?.inject(this)
-        (mAppComponent?.extras() as HashMap<String, Any>).put(ConfigModule::class.java.simpleName, mConfigModules!!)
+                 (mAppComponent?.extras()!!.extract).put(ConfigModule::class.java.simpleName, mConfigModules!!)
         mConfigModules?.forEach {
             it.registerComponents(mApplication!!, mAppComponent!!.getIAPIManger())
         }

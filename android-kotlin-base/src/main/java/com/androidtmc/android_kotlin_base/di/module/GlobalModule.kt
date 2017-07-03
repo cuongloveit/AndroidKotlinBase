@@ -15,21 +15,21 @@ import javax.inject.Singleton
  */
 @Module
 class GlobalModule {
-    private var mCacheFile: File
-    private var  mGsonConfiguration: AppModule.GsonConfiguration
-    private  var mOkHttpConfiguration: ClientModule.OkHttpConfiguration
-    private  var mRetrofitConfiguration: ClientModule.RetrofitConfiguration
-    private  var mInterceptors: List<Interceptor>
-    private  var baseUrl: String
+    private var mCacheFile: File?
+    private var  mGsonConfiguration: AppModule.GsonConfiguration?
+    private  var mOkHttpConfiguration: ClientModule.OkHttpConfiguration?
+    private  var mRetrofitConfiguration: ClientModule.RetrofitConfiguration?
+    private  var mInterceptors: List<Interceptor>?
+    private  var baseUrl: String?
 
 
     constructor(builder: Builder){
-        this.mCacheFile = builder.cacheFile!!
-        this.baseUrl = builder.baseUrl!!
-        this.mGsonConfiguration = builder.gsonConfiguration!!
-        this.mInterceptors = builder.interceptors!!
-        this.mRetrofitConfiguration = builder.retrofitConfiguration!!
-        this.mOkHttpConfiguration = builder.okHttpConfiguration!!
+        this.mCacheFile = builder.cacheFile
+        this.baseUrl = builder.baseUrl
+        this.mGsonConfiguration = builder.gsonConfiguration
+        this.mInterceptors = builder.interceptors
+        this.mRetrofitConfiguration = builder.retrofitConfiguration
+        this.mOkHttpConfiguration = builder.okHttpConfiguration
     }
     companion object {
         fun builder(): Builder {
@@ -51,17 +51,17 @@ class GlobalModule {
         return this.mGsonConfiguration
     }
 
-    @Provides
-    @Singleton
-    fun provideInterceptors(): List<Interceptor>? {
-        return mInterceptors
-    }
+//    @Provides
+//    @Singleton
+//    fun provideInterceptors(): List<Interceptor>? {
+//        return mInterceptors
+//    }
 
     @Provides
     @Singleton
     @Named("baseUrl")
     fun provideBaseUrl(): String {
-        return baseUrl
+        return baseUrl!!
     }
 
     @Provides
