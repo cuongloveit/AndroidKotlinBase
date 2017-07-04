@@ -27,6 +27,10 @@ ext {
             rxLifeCycleVersion       : "2.1.0",
             rxCacheVersion           : "1.8.0-2.x",
             polyglotVersion          : "0.0.3",
+            mockitoVersion           : "2.+",
+            hamcrestVersion          : "2.0.0.0",
+            robolectricVersion       : "3.1.4",
+            assertJVersion           : "3.8.0",
     ]
 
     dependencies = [
@@ -78,5 +82,19 @@ ext {
             //RxCache
             "rxCache"                 : "com.github.VictorAlbertos.RxCache:runtime:${version["rxCacheVersion"]}",
             "polyglot"                : "com.github.VictorAlbertos.Jolyglot:gson:${version["polyglotVersion"]}",
+
+            //--------Testing--------
+            //Mockito
+            "mockito"                 : "org.mockito:mockito-core:${version["mockitoVersion"]}",
+            //Hamcrest
+            "hamcrest"                : "org.hamcrest:hamcrest-junit:${version["hamcrestVersion"]}",
+
+            //Robolectric
+            "robolectric"             : "org.robolectric:robolectric:${version["robolectricVersion"]}",
+            "robolectricV4"           : "org.robolectric:shadows-support-v4:${version["robolectricVersion"]}",
+            "robolectricMultidex"     : "org.robolectric:shadows-multidex:${version["robolectricVersion"]}",
+
+            //AssertJ
+            "assertJ"                 : "org.assertj:assertj-core:${version["assertJVersion"]}"
     ]
 }

@@ -4,4 +4,5 @@
     <string name="enter_your_email">Enter your email</string>
     <string name="user_has_just_created">User has just created</string>
     <string name="create">Create</string>
+    <string name="creating___">Creating...</string>
 </resources>

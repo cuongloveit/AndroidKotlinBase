@@ -12,8 +12,7 @@ import com.androidtmc.example.contract.UserContract
 import com.androidtmc.example.model.entity.User
 import com.androidtmc.example.presenter.UserPresenter
 import com.androidtmc.example.view.activity.MainActivity
-import kotlinx.android.synthetic.main.fragement_main.*
-import kotlinx.android.synthetic.main.fragement_main.view.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import vn.eazy.base.mvp.example.mvp.di.component.DaggerUserComponent
 import vn.eazy.base.mvp.example.mvp.di.module.UserModule
 
@@ -41,8 +40,10 @@ class MainFragment : BaseMainFragment<UserPresenter>(),UserContract.View {
         getMyToolbarHelper()?.showLeftButton(R.mipmap.ic_menu_white_24dp, View.OnClickListener {
             //click left button
         })
-        rootView.btnCreate.setOnClickListener({
+        btnCreate.setOnClickListener({
             val user = User(edtName.text.toString(),edtEmail.text.toString())
+            btnCreate.text = getString(R.string.creating___)
+            btnCreate.isEnabled = false
             presenter.createUser(user)
 
         })
@@ -78,7 +79,7 @@ class MainFragment : BaseMainFragment<UserPresenter>(),UserContract.View {
         return activity as MainActivity
     }
     override fun getLayoutResource(): Int {
-        return R.layout.fragement_main
+        return R.layout.fragment_main
     }
 
     override fun showLoading() {
@@ -88,7 +89,10 @@ class MainFragment : BaseMainFragment<UserPresenter>(),UserContract.View {
     }
 
     override fun onCreateUserSuccess(user: User) {
+        btnCreate.isEnabled = true
+        btnCreate.text = getString(R.string.create)
         tvName.text = "Name: ${user.name}"
         tvEmail.text = "Email: ${user.email}"
+
     }
 }

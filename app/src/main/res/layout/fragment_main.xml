@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@android:color/darker_gray"
+    android:background="@mipmap/bg_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -43,7 +43,7 @@
         android:text="@string/user_has_just_created"
         app:layout_constraintTop_toBottomOf="@+id/btnCreate"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         style="@style/HeadingText"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="8dp"

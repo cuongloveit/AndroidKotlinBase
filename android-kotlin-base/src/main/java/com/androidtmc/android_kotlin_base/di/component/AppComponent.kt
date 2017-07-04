@@ -28,6 +28,7 @@ interface AppComponent {
     fun cacheFile(): File
     fun getGson(): Gson
     fun httpUrl(): HttpUrl
+    fun retrofit(): Retrofit
 
 
 }

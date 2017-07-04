@@ -12,7 +12,7 @@ class MainActivity : BaseMainActivity<UserPresenter, MyToolbarHelper>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       changeFragment(MainFragment(), false)
+        changeFragment(MainFragment(), false)
     }
 
 
@@ -22,16 +22,13 @@ class MainActivity : BaseMainActivity<UserPresenter, MyToolbarHelper>() {
     override fun showToolbar(isShow: Boolean) {
     }
 
-    override fun onColorOfToolbar(): Int {
-        return R.color.colorPrimary
-    }
+    override fun onColorOfToolbar() = R.color.colorPrimary
 
-    override fun onImageForLeftButtonToolbar(): Int {
-        return R.mipmap.ic_menu_white_24dp
-    }
+    override fun onImageForLeftButtonToolbar() = R.mipmap.ic_menu_white_24dp
 
 
-    override fun getLayoutResource(): Int {
-        return R.layout.activity_main
-    }
+    override fun getLayoutResource() = R.layout.activity_main
+
+    fun testing() = "testing"
+
 }
