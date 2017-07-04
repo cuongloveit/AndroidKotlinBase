@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.cuongloveit'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -76,11 +79,10 @@ dependencies {
     implementation rootProject.ext.dependencies["rx-permissions"]
 
     //Dagger
-    implementation (rootProject.ext.dependencies["dagger"]){
+    implementation(rootProject.ext.dependencies["dagger"]) {
         force true
     }
     kapt rootProject.ext.dependencies["dagger-compiler"]
-
 
     //RxLifeCycle
     implementation rootProject.ext.dependencies["rxLifeCycle"]
